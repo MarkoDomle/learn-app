@@ -100,7 +100,7 @@ const Hooks: React.FC = () => {
       </Typography>
       <Grid container spacing={4}>
         {hooksData.map((hook) => (
-          <Grid item key={hook.title} xs={12} sm={6} md={4}>
+          <Grid item key={hook.title} xs={12} sm={6} md={4} py={5}>
             <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column', p: 2 }}>
               <CardContent>
                 <Typography gutterBottom variant="h5" component="h2">
@@ -131,6 +131,7 @@ const Hooks: React.FC = () => {
                   width: '100%',
                   objectFit: 'contain',
                 }}
+                
               />
             </Card>
           </Grid>

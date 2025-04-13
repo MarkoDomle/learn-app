@@ -17,7 +17,7 @@ const guidanceSections = [
     cards: [
       { path: '/todoo1', title: 'Var, Let & Const', description: 'Understand how variables work in JavaScript.' },
       { path: '/todoo2', title: 'Data Types', description: 'Learn about strings, numbers, booleans, objects, and more.' },
-      { path: '/todoo3', title: 'Functions & Scope', description: 'Master JS functions and how scope works.' },
+      { path: '/functionsandscope', title: 'Functions & Scope', description: 'Master JS functions and how scope works.' },
     ],
   },
   {
@@ -42,6 +42,10 @@ const sectionColors = [green[100], yellow[200], red[500]];
 
 const Home: React.FC = () => {
   return (
+    <Box  sx={{
+      background: 'linear-gradient(to right, #e3f2fd, #fce4ec)',
+      minHeight: '100vh',
+    }}>
     <>
       {/* Top Header Bar */}
       <AppBar position="static" color="transparent" elevation={0} sx={{ borderBottom: '1px solid #ddd', mb: 4 }}>
@@ -113,6 +117,7 @@ const Home: React.FC = () => {
         ))}
       </Container>
     </>
+    </Box>
   );
 };
 
