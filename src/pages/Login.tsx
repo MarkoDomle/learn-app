@@ -1,11 +1,14 @@
 // src/pages/Login.tsx
 import React from 'react';
 import {
-  Container, Typography, TextField, Button, Box, Paper, Stack
+  Container, Typography, TextField, Button, Box, Paper, Stack,
+  AppBar,
+  Toolbar
 } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { Link, Link as RouterLink } from 'react-router-dom';
 
 const loginSchema = z.object({
   email: z.string().email("Invalid email"),
@@ -25,6 +28,31 @@ const Login: React.FC = () => {
   };
 
   return (
+         <>
+    {/* Top Header Bar */}
+      <AppBar
+  position="static"
+  color="transparent"
+  elevation={0}
+  sx={{ borderBottom: '1px solid #ddd', mb: 4 }}
+>
+  <Toolbar sx={{ justifyContent: 'space-between' }}>
+    {/* Home on the left */}
+    <Button color="primary" variant="text" component={Link} to="/">
+      Home
+    </Button>
+
+    {/* Sign In and Register on the right */}
+    <Stack direction="row" spacing={2}>
+      <Button color="primary" variant="text" component={Link} to="/login">
+        Sign In
+      </Button>
+      <Button color="primary" variant="contained" component={Link} to="/register">
+        Register
+      </Button>
+    </Stack>
+  </Toolbar>
+</AppBar> 
     <Container maxWidth="sm" sx={{ mt: 8 }}>
       <Paper elevation={3} sx={{ p: 4 }}>
         <Typography variant="h4" align="center" gutterBottom>
@@ -55,7 +83,7 @@ const Login: React.FC = () => {
         </Box>
       </Paper>
     </Container>
+    </>
   );
 };
-
 export default Login;

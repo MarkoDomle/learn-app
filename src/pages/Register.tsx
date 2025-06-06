@@ -6,10 +6,14 @@ import {
   Typography,
   Button,
   Paper,
+  AppBar,
+  Toolbar,
+  Stack,
 } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { Link, Link as RouterLink } from 'react-router-dom';
 
 // Zod validation schema
 const schema = z
@@ -40,11 +44,36 @@ const Register: React.FC = () => {
   };
 
   return (
+        <>
+        {/* Top Header Bar */}
+          <AppBar
+      position="static"
+      color="transparent"
+      elevation={0}
+      sx={{ borderBottom: '1px solid #ddd', mb: 4 }}
+    >
+      <Toolbar sx={{ justifyContent: 'space-between' }}>
+        {/* Home on the left */}
+        <Button color="primary" variant="text" component={Link} to="/">
+          Home
+        </Button>
+    
+        {/* Sign In and Register on the right */}
+        <Stack direction="row" spacing={2}>
+          <Button color="primary" variant="text" component={Link} to="/login">
+            Sign In
+          </Button>
+          <Button color="primary" variant="contained" component={Link} to="/register">
+            Register
+          </Button>
+        </Stack>
+      </Toolbar>
+    </AppBar> 
     <Container maxWidth="sm">
       <Paper elevation={3} sx={{ p: 4, mt: 10 }}>
         <Typography variant="h4" align="center" gutterBottom>
           Register
-        </Typography>
+        </Typography> 
         <Box
           component="form"
           onSubmit={handleSubmit(onSubmit)}
@@ -80,6 +109,7 @@ const Register: React.FC = () => {
         </Box>
       </Paper>
     </Container>
+    </>
   );
 };
 
