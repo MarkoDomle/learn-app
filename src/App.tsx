@@ -8,6 +8,7 @@ import Hooks from './pages/Hooks';
 import DataTypes from './pages/DataTypes';
 import Register from './pages/Register';
 import FunctionsAndScope from './pages/FunctionsAndScopes';
+import Login from './pages/Login';
 function App() {
   return (
     <BrowserRouter>
@@ -25,7 +26,7 @@ function App() {
         <Route path="/todoo3" element={<Todoo3 />} />
         <Route path="/guide1" element={<Hooks />} />
         <Route path="/register" element={<Register />} />
-
+        <Route path="/login" element={<Login />} />
       </Routes>
     </BrowserRouter>
   );
