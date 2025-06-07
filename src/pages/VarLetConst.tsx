@@ -1,11 +1,11 @@
 import React from 'react';
-import { Container, Grid, Card, CardContent, CardMedia, Typography, Link } from '@mui/material';
+import { Container, Grid, Card, CardContent, CardMedia, Typography, Button, AppBar, Toolbar, Stack } from '@mui/material';
+import { Link, Link as RouterLink } from 'react-router-dom';
 
 // Import distinct images for each card
-import myVarImage from '../assets/Var_image1.png' 
-import myVarImage2 from '../assets/Var_image2.png'
-// import myLetImage from '../assets/my-let-image.jpg';
-// import myConstImage from '../assets/my-const-image.jpg';
+import myVarImage from '../assets/Var_image.png' 
+import myLetImage from '../assets/Let_image.png';
+import myConstImage from '../assets/Const_image.png';
 
 const Todoo1: React.FC = () => {
   // Define the three blocks for var, let, and const with their own images
@@ -15,24 +15,47 @@ const Todoo1: React.FC = () => {
       definition:
         'var declares a variable that is function-scoped (or globally-scoped) and can be re-declared and updated. It is hoisted.',
       image: myVarImage,
-      additionalImage: myVarImage2,
-
     },
     {
       title: 'let',
       definition:
         'let declares a block-scoped variable that can be updated but not re-declared within the same scope. It is not hoisted like var.',
-      // image: myLetImage,
+       image: myLetImage,
     },
     {
       title: 'const',
       definition:
         'const declares a block-scoped variable that cannot be re-assigned after its initial assignment, ensuring immutability.',
-      // image: myConstImage,
+      image: myConstImage,
     },
   ];
 
   return (
+    <>
+      <AppBar
+  position="static"
+  color="transparent"
+  elevation={0}
+  sx={{ borderBottom: '1px solid #ddd', mb: 4 }}
+>
+  <Toolbar sx={{ justifyContent: 'space-between' }}>
+    {/* Home on the left */}
+    <Button color="primary" variant="text" component={Link} to="/">
+      Home
+    </Button>
+
+    {/* Sign In and Register on the right */}
+    <Stack direction="row" spacing={2}>
+      <Button color="primary" variant="text" component={Link} to="/login">
+        Sign In
+      </Button>
+      <Button color="primary" variant="contained" component={Link} to="/register">
+        Register
+      </Button>
+    </Stack>
+  </Toolbar>
+</AppBar> 
+
     <Container sx={{ py: 8 }}>
       <Typography variant="h4" component="h1" align="center" gutterBottom>
         Understanding var, let, and const
@@ -62,22 +85,15 @@ const Todoo1: React.FC = () => {
     objectFit: 'contain', // ensures the entire image is visible
   }}
 />
-   {/* Additional image below the first one */}
    <CardMedia
-                component="img"
-                image={card.additionalImage}
-                alt={`${card.title} additional image`}
-                sx={{
-                  mt: 2,
-                  width: '100%',
-                  objectFit: 'contain',
-                }}
+               
               />
             </Card>
           </Grid>
         ))}
       </Grid>
     </Container>
+    </>
   );
 };
 

@@ -8,8 +8,8 @@ import Box from '@mui/material/Box';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Button from '@mui/material/Button';
-import { green, yellow, red } from '@mui/material/colors';
 import Stack from '@mui/material/Stack';
+import { green, yellow, red } from '@mui/material/colors';
 
 const guidanceSections = [
   {
@@ -39,14 +39,11 @@ const guidanceSections = [
 ];
 
 const sectionColors = [green[100], yellow[200], red[500]];
+let lockedSections = ['React Fundamentals', 'Final Level: React Mastery'];
 
 const Home: React.FC = () => {
   return (
-    <Box  sx={{
-      background: 'linear-gradient(to right, #e3f2fd, #fce4ec)',
-      minHeight: '100vh',
-    }}>
-    <>
+    <Box sx={{ background: 'linear-gradient(to right, #e3f2fd, #fce4ec)', minHeight: '100vh' }}>
       {/* Top Header Bar */}
       <AppBar position="static" color="transparent" elevation={0} sx={{ borderBottom: '1px solid #ddd', mb: 4 }}>
         <Toolbar sx={{ justifyContent: 'flex-end' }}>
@@ -61,62 +58,104 @@ const Home: React.FC = () => {
         </Toolbar>
       </AppBar>
 
-      {/* Existing content */}
+      {/* Main Content */}
       <Container sx={{ py: 8 }}>
         <Typography variant="h3" component="h1" align="center" gutterBottom>
           Hi, here you can learn JS
         </Typography>
 
-        {guidanceSections.map((section, index) => (
-          <Box
-            key={index}
-            sx={{
-              backgroundColor: sectionColors[index] || 'inherit',
-              py: 4,
-              px: 2,
-              borderRadius: 2,
-              mb: 5,
-              
-            }}
-          >
-            <Typography variant="h5" component="h2" sx={{ mb: 4 }}>
-              {section.title}
-            </Typography>
-            <Grid container spacing={4}>
-              {section.cards.map((card) => (
-                <Grid item key={card.path} xs={12} sm={6} md={4}>
-                  <Paper
-                    component={Link}
-                    to={card.path}
-                    elevation={3}
+        {guidanceSections.map((section, index) => {
+          const isLocked = lockedSections.includes(section.title.trim());
+          return (
+            <Box
+              key={index}
+              sx={{
+                position: 'relative',
+                backgroundColor: sectionColors[index] || 'inherit',
+                py: 4,
+                px: 2,
+                borderRadius: 2,
+                mb: 5,
+                overflow: 'hidden',
+                pointerEvents: isLocked ? 'none' : 'auto',
+              }}
+            >
+              {isLocked && (
+                <>
+                  <Box
                     sx={{
-                      display: 'flex',
-                      flexDirection: 'column',
-                      justifyContent: 'space-between',
-                      height: '60%',
-                      p: 3,
+                      position: 'absolute',
+                      inset: 0,
+                      backdropFilter: 'blur(4px)',
+                      backgroundColor: 'rgba(255,255,255,0.6)',
+                      zIndex: 1,
+                    }}
+                  />
+                  <Box
+                    sx={{
+                      position: 'absolute',
+                      top: '20%',
+                      left: '50%',
+                      transform: 'translateX(-50%)',
+                      zIndex: 2,
                       textAlign: 'center',
-                      textDecoration: 'none',
-                      color: 'inherit',
-                      transition: 'transform 0.2s',
-                      '&:hover': { transform: 'scale(1.05)' },
-                        
-                    }}  
+                    }}
                   >
-                    <Typography variant="h5" component="h2">
-                      {card.title}
+                    <Typography
+                      variant="h6"
+                      fontWeight="bold"
+                      sx={{
+                        color: '#222',
+                        backgroundColor: 'rgba(255, 255, 255, 0.95)',
+                        px: 2,
+                        py: 1,
+                        borderRadius: 1,
+                      }}
+                    >
+                      🚫 You haven’t reached this level yet
                     </Typography>
-                    <Typography variant="body1" sx={{ mt: 1 }}>
-                      {card.description}
-                    </Typography>
-                  </Paper>
-                </Grid>
-              ))}
-            </Grid>
-          </Box>
-        ))}
+                  </Box>
+                </>
+              )}
+
+              <Typography variant="h5" component="h2" sx={{ mb: 4 }}>
+                {section.title}
+              </Typography>
+              <Grid container spacing={4}>
+                {section.cards.map((card) => (
+                  <Grid item key={card.path} xs={12} sm={6} md={4}>
+                    <Paper
+                      component={Link}
+                      to={card.path}
+                      elevation={3}
+                      sx={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'space-between',
+                        height: '60%',
+                        p: 3,
+                        textAlign: 'center',
+                        textDecoration: 'none',
+                        color: 'inherit',
+                        transition: 'transform 0.2s',
+                        '&:hover': { transform: 'scale(1.05)' },
+                        pointerEvents: isLocked ? 'none' : 'auto',
+                      }}
+                    >
+                      <Typography variant="h5" component="h2">
+                        {card.title}
+                      </Typography>
+                      <Typography variant="body1" sx={{ mt: 1 }}>
+                        {card.description}
+                      </Typography>
+                    </Paper>
+                  </Grid>
+                ))}
+              </Grid>
+            </Box>
+          );
+        })}
       </Container>
-    </>
     </Box>
   );
 };
