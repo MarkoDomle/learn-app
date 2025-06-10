@@ -39,12 +39,12 @@ const Todoo1: React.FC = () => {
   sx={{ borderBottom: '1px solid #ddd', mb: 4 }}
 >
   <Toolbar sx={{ justifyContent: 'space-between' }}>
-    {/* Home on the left */}
+    {/* Home*/}
     <Button color="primary" variant="text" component={Link} to="/">
       Home
     </Button>
 
-    {/* Sign In and Register on the right */}
+    {/* Sign In */}
     <Stack direction="row" spacing={2}>
       <Button color="primary" variant="text" component={Link} to="/login">
         Sign In
@@ -81,8 +81,8 @@ const Todoo1: React.FC = () => {
     display: 'block',
     mt: 2,
     width: '100%',
-    maxHeight: 200, // limits the height, but won't force crop
-    objectFit: 'contain', // ensures the entire image is visible
+    maxHeight: 200, 
+    objectFit: 'contain', 
   }}
 />
    <CardMedia
